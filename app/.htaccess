@@ -1,0 +1,26 @@
+# .htaccess - SUPER SECURE VERSION
+
+# 1. Block directory listing
+Options -Indexes
+
+# 2. Block access to sensitive files
+<FilesMatch "\.(env|config|sql|log|htaccess)$">
+    Deny from all
+</FilesMatch>
+
+# 3. Hide PHP errors from users
+php_flag display_errors off
+
+# 4. Custom error pages  
+ErrorDocument 403 /errors/403.php
+ErrorDocument 404 /errors/404.php
+
+# 5. Prevent script execution in uploads
+<Directory "/uploads">
+    Options -Indexes
+    RemoveHandler .php .phtml .php3
+    RemoveType .php .phtml .php3
+    <FilesMatch "\.(php|phtml|php3)$">
+        Deny from all
+    </FilesMatch>
+</Directory>

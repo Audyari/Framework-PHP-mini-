@@ -1,0 +1,1 @@
+<h1> dipanggil oleh footer.php</h1>
