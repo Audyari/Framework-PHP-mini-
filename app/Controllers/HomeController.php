@@ -1,18 +1,20 @@
 <?php
 class HomeController
 {
+
     public function index()
     {
-        echo "🏠 HomeController::index() called";
+        echo "Home controller";
+    }
+
+    public function test($name = null)
+    {
+        if ($name === null) {
+            echo "Home controller Tanpa Parameter";
+        } else {
+            echo "Home controller Dengan Parameter: " . $name;
+        }
     }
     
-    public function about()
-    {
-        echo "📖 HomeController::about() called";
-    }
-    
-    public function contact()
-    {
-        echo "📞 HomeController::contact() called";
-    }
+   
 }
