@@ -8,5 +8,10 @@ class HomeController extends Controller
       return $this->view('home', ['user' => $user->name, 'age' => $user->age]);
     }
 
+    public function about()
+    {
+     echo "About";
+    }
+
    
 }
