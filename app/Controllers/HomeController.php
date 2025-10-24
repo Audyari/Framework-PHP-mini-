@@ -18,6 +18,10 @@ class HomeController extends Controller
             'title' => 'Daftar Users', 
             'users' => $users
         ];
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
         
         return $this->view('home', $data);
     }

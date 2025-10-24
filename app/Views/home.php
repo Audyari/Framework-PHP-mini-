@@ -64,6 +64,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Username</th>
+                    <th>Password</th>
                     <th>Role</th>
                 </tr>
             </thead>
@@ -72,6 +73,7 @@
                 <tr>
                     <td><?php echo $user->id; ?></td>
                     <td><?php echo htmlspecialchars($user->username); ?></td>
+                    <td><?php echo htmlspecialchars($user->password); ?></td>
                     <td>
                         <span class="<?php echo $user->role; ?>">
                             <?php echo strtoupper($user->role); ?>
