@@ -1,13 +1,17 @@
 <?php
 
 class Controller {
-   
-    public function view($view, $data = []) {
-        require_once "../app/Views/" . $view . ".php";
-    }
-
-    public function model($model) {
-        require_once "../app/Models/" . $model . ".php";
-        return new $model();
+    protected function view($view, $data = []) {
+        // Extract data array menjadi variables
+        extract($data);
+        
+        // Load view file
+        $viewFile = __DIR__ . "/../views/{$view}.php";
+        
+        if (file_exists($viewFile)) {
+            require_once $viewFile;
+        } else {
+            die("View file not found: {$viewFile}");
+        }
     }
 }

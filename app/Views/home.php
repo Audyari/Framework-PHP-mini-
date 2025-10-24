@@ -1,79 +1,98 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Users Data</title>
-
-</head>
-
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $title ?? 'Home'; ?></title>
     <style>
-        .debug-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .debug-card h1 {
-            font-size: 24px;
+        h1 {
+            text-align: center;
+            margin-top: 50px;
         }
 
-        .debug-card h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .debug-card .subtitle {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .debug-card table {
+        table {
             width: 100%;
+            margin-bottom: 50px;
             border-collapse: collapse;
-            margin-top: 10px;
         }
 
-        .debug-card th,
-        .debug-card td {
-            padding: 8px;
-            border: 1px solid #ccc;
-            text-align: left;
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
         }
 
-        .debug-card th {
+        th {
             background-color: #f2f2f2;
         }
+
+        .admin {
+            background-color: #ffcccc;
+        }
+
+        .user {
+            background-color: #ccffcc;
+        }
+
+        .guest {
+            background-color: #ccccff;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+        }
     </style>
-    <div class="debug-card">
-        <h1>📋 Users Database Debug</h1>
-        <h2><?php echo $data['title']; ?></h2>
-        <div class="subtitle">Total Users: <?php echo count($data['users']); ?> | Generated on: <?php echo date('Y-m-d H:i:s'); ?></div>
-        <table class="data-table">
+</head>
+<body>
+    <h1><?php echo $title ?? 'Halaman Awal'; ?></h1>
+    
+    <?php if (isset($users) && !empty($users)): ?>
+        <table>
             <thead>
                 <tr>
-                    <?php
-                    $firstUser = $data['users'][0];
-                    foreach ($firstUser as $key => $value) {
-                        echo "<th class='table-header'>$key</th>";
-                    }
-                    ?>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                foreach ($data['users'] as $user) {
-                    echo "<tr>";
-                    foreach ($user as $key => $value) {
-                        echo "<td class='table-cell'>$value</td>";
-                    }
-                    echo "</tr>";
-                }
-                ?>
+                <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?php echo $user->id; ?></td>
+                    <td><?php echo htmlspecialchars($user->username); ?></td>
+                    <td>
+                        <span class="<?php echo $user->role; ?>">
+                            <?php echo strtoupper($user->role); ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
+        
+        <div class="message">
+            <p>Total: <strong><?php echo count($users); ?> users</strong> found in database</p>
+        </div>
+    <?php else: ?>
+        <div class="message">
+            <p>Halaman Awal</p>
+        </div>
+    <?php endif; ?>
+    
+    <div style="text-align: center; margin-top: 20px; margin-bottom: 50px;">
+        <a href="<?php echo $GLOBALS['link']; ?>">← Back to Home</a>
     </div>
 </body>
-
 </html>

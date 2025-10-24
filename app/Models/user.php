@@ -1,20 +1,12 @@
 <?php
 
-class User {
+namespace App\Models;
 
-    private $_db;
-    public $name;
-    public $age;
+use Illuminate\Database\Eloquent\Model;
 
-    public function __construct() {
-        $this->_db = Database::getInstance();
-    }
-
-    public function index() {
-        return $this->_db->index("users");
-    }
-
-    public function getAllUser() {
-      return $this->_db->getAllUser("users");
-    }
+class User extends Model {
+    protected $table = 'users';
+    public $timestamps = false;
+    protected $fillable = ['username', 'password', 'role'];
+    protected $hidden = ['password'];
 }
