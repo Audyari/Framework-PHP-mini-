@@ -1,7 +1,8 @@
 <?php
 
 class Controller {
-     public function __construct() {
-        echo "Controller class loaded! 🎉<br>";
+   
+    public function view($view) {
+        require_once "../app/Views/" . $view . ".php";
     }
 }

@@ -1,20 +1,11 @@
-<?php
-class HomeController
+<?php   
+class HomeController extends Controller
 {
 
     public function index()
     {
-        echo "Home controller";
+      return $this->view('home');
     }
 
-    public function test($name = null)
-    {
-        if ($name === null) {
-            echo "Home controller Tanpa Parameter";
-        } else {
-            echo "Home controller Dengan Parameter: " . $name;
-        }
-    }
-    
    
 }

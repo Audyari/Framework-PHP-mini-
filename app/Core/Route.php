@@ -2,21 +2,26 @@
 
 class Route
 {
-
     protected $controller = 'homeController';
     protected $method = 'index';
     protected $param = [];
 
     public function __construct()
     {
+        // Inisialisasi $url dengan array kosong
+        $url = [];
+        
         if (isset($_GET['url'])) {
             $url = explode('/', filter_var(trim($_GET['url']), FILTER_SANITIZE_URL));
         }
 
-        $url[0] = $url[0] . 'Controller';
+        // Cek jika $url tidak kosong sebelum mengakses index
+        if (!empty($url[0])) {
+            $url[0] = $url[0] . 'Controller';
 
-        if (file_exists('../app/Controllers/' . $url[0] . '.php')) {
-            $this->controller = $url[0];
+            if (file_exists('../app/Controllers/' . $url[0] . '.php')) {
+                $this->controller = $url[0];
+            }
         }
 
         require_once '../app/Controllers/' . $this->controller . '.php';
@@ -28,9 +33,11 @@ class Route
             }
         }
 
-        unset($url[0]);
-        unset($url[1]);
-        $this->param = $url;
+        // Hapus element hanya jika mereka ada
+        if (isset($url[0])) unset($url[0]);
+        if (isset($url[1])) unset($url[1]);
+        
+        $this->param = $url ? array_values($url) : [];
 
         call_user_func_array([$this->controller, $this->method], $this->param);
     }
