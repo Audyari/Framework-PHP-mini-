@@ -7,5 +7,7 @@
 </head>
 <body>
     <h1>View Home</h1>
+    <p><?php echo $data['user']; ?></p>
+    <p><?php echo $data['age']; ?></p>
 </body>
 </html>
